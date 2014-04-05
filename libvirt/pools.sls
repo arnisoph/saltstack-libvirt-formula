@@ -16,9 +16,10 @@ include:
     - contents_pillar: libvirt:pools:{{ name }}:xml
 
 {% if p.type == 'dir' and p.ensure|default('running') in ['present', 'running'] %}
-{{ p.path }}:
+{{ name }}-{{ p.path }}:
   file:
     - directory
+    - name: {{ p.path }}
 {% endif %}
 
 pool-{{ name }}:
