@@ -1,0 +1,23 @@
+{% load_yaml as rawmap %}
+Debian:
+  pkgs:
+    - libvirt0
+    - libvirt-dev
+    - libvirt-bin
+  config:
+    storages_dir: {}
+    storage_file: {}
+    networks_dir: {}
+    network_file: {}
+  service:
+    name: libvirt-bin
+  kvm:
+    pkgs:
+      - qemu-kvm
+Redhat:
+  pkgs:
+    - libvirt
+  config: {}
+  service:
+    name: libvirtd
+{% endload %}
