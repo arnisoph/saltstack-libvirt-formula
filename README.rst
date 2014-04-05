@@ -7,7 +7,7 @@ Salt Stack Formula to set up and configure libvirt, a virtualization API
 NOTICE BEFORE YOU USE
 =====================
 
-* This formula aims to follow the conventions and recommendations described at http://docs.saltstack.com/topics/conventions/formulas.html
+* This formula aims to follow the conventions and recommendations described at http://docs.saltstack.com/en/latest/topics/best_practices.html
 
 TODO
 ====
