@@ -21,7 +21,7 @@ net-{{ name }}:
     - name: virsh net-define {{ nf_path }}
     - unless: virsh -q net-list --all | grep -q '^{{ name }}'
  {% elif n.ensure|default('running') == 'absent' %}
-    - name: virsh net-destroy {{ name }} 2>&1 /dev/null; virsh net-undefine {{ name }}
+    - name: virsh net-destroy {{ name }} 2>&1 1> /dev/null; virsh net-undefine {{ name }}
     - onlyif: virsh -q net-list --all | grep -q '^{{ name }}'
  {% endif %}
 

@@ -29,7 +29,7 @@ pool-{{ name }}:
     - name: virsh pool-define {{ po_path }}
     - unless: virsh -q pool-list --all | grep -q '^{{ name }}'
  {% elif p.ensure|default('running') == 'absent' %}
-    - name: virsh pool-destroy {{ name }} 2>&1 /dev/null; virsh pool-undefine {{ name }}
+    - name: virsh pool-destroy {{ name }} 2>&1 1> /dev/null; virsh pool-undefine {{ name }}
     - onlyif: virsh -q pool-list --all | grep -q '^{{ name }}'
  {% endif %}
 
