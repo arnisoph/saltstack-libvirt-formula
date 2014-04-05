@@ -10,9 +10,9 @@ include:
 {{ po_path }}:
   file:
     - {% if p.ensure|default('running') in ['present', 'running'] %}managed{% elif p.ensure|default('running') == 'absent' %}absent{% endif %}
-    - mode: {{ datamap.config.network_file.mode|default('600') }}
-    - user: {{ datamap.config.network_file.user|default('root') }}
-    - group: {{ datamap.config.network_file.group|default('root') }}
+    - mode: {{ datamap.config.storage_file.mode|default('600') }}
+    - user: {{ datamap.config.storage_file.user|default('root') }}
+    - group: {{ datamap.config.storage_file.group|default('root') }}
     - contents_pillar: libvirt:pools:{{ name }}:xml
 
 {% if p.type == 'dir' and p.ensure|default('running') in ['present', 'running'] %}
