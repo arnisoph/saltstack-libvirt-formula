@@ -31,23 +31,19 @@ Available states
 
 ``libvirt``
 -----------
-
 Installs libvirt and manages libvirt service
 
 ``libvirt.kvm``
 ---------------
-
 Manages QEMU/ KVM
-
-``libvirt.pools``
------------------
-
-Manages libvirt storage pools
 
 ``libvirt.networks``
 --------------------
-
 Manages libvirt networks
+
+``libvirt.pools``
+-----------------
+Manages libvirt storage pools
 
 Additional resources
 ====================
