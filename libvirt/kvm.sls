@@ -8,6 +8,6 @@ kvm:
   pkg:
     - installed
     - pkgs:
-{% for p in datamap.pkgs %}
+{% for p in datamap.kvm.pkgs %}
       - {{ p }}
 {% endfor %}
