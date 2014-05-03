@@ -4,6 +4,7 @@ Debian:
     - libvirt0
     - libvirt-dev
     - libvirt-bin
+    - pm-utils
   config:
     storages_dir: {}
     storage_file: {}
