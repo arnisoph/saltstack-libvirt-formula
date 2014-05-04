@@ -19,7 +19,8 @@ set -e
 . /lib/lsb/init-functions
 
 do_start() {
-    echo 1 > /sys/kernel/mm/ksm/run
+    echo 1 > /sys/kernel/mm/ksm/run #TODO use a variable for that
+    echo 200 > /sys/kernel/mm/ksm/sleep_millisecs #TODO use a variable for that
     log_success_msg "Enabling Kernel Samepage Merging"
 }
 
