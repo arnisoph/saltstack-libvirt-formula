@@ -15,10 +15,19 @@ Debian:
   kvm:
     pkgs:
       - qemu-kvm
-Redhat:
+    ksm:
+      service_script: {}
+RedHat:
   pkgs:
     - libvirt
-  config: {}
+  config:
+    storages_dir: {}
+    storage_file: {}
+    networks_dir: {}
+    network_file: {}
   service:
     name: libvirtd
+  kvm:
+    pkgs:
+      - qemu-kvm
 {% endload %}
