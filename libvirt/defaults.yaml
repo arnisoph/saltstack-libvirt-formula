@@ -15,6 +15,7 @@ Debian:
   kvm:
     pkgs:
       - qemu-kvm
+      - qemu-utils
     ksm:
       service_script: {}
 RedHat:
