@@ -1,3 +1,5 @@
+#!jinja|yaml
+
 {% from "libvirt/defaults.yaml" import rawmap with context %}
 {% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('libvirt:lookup')) %}
 
@@ -14,6 +16,8 @@ include:
     - user: {{ datamap.config.storage_file.user|default('root') }}
     - group: {{ datamap.config.storage_file.group|default('root') }}
     - contents_pillar: libvirt:pools:{{ name }}:xml
+    - watch_in:
+      - service: libvirt
 
 {% if p.type == 'dir' and p.ensure|default('running') in ['present', 'running'] %}
 {{ name }}-{{ p.path }}:
