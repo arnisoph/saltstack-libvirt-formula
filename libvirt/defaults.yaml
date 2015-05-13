@@ -11,7 +11,7 @@ Debian:
     networks_dir: {}
     network_file: {}
   service:
-    name: libvirt-bin
+    name: libvirtd
   kvm:
     pkgs:
       - qemu-kvm
