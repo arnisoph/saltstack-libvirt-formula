@@ -21,7 +21,6 @@ ksm_servicescript:
     - mode: 755
     - user: root
     - group: root
-{% endif %}
 
 {% set kk = datamap.kvm.ksm|default({'service': {}}) %}
 ksm_service:
@@ -29,3 +28,4 @@ ksm_service:
     - {{ kk.service.state|default('running') }}
     - name: {{ kk.service.name|default('ksm') }}
     - enable: {{ kk.service.enable|default(True) }}
+{% endif %}
