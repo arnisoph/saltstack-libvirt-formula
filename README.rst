@@ -84,3 +84,8 @@ Further reading:
 
 .. image:: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva.png
     :target: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva
+
+
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Join the chat at https://gitter.im/bechtoldt/saltstack-libvirt-formula
+   :target: https://gitter.im/bechtoldt/saltstack-libvirt-formula?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
