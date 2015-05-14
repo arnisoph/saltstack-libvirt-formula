@@ -1,0 +1,39 @@
+kernel:
+  Linux:
+    config:
+      storages_dir: {}
+      storage_file: {}
+      networks_dir: {}
+      network_file: {}
+    kvm:
+      ksm:
+        service: {}
+        service_script: {}
+os_family:
+  Debian:
+    pkgs:
+      - libvirt0
+      - libvirt-dev
+      - libvirt-bin
+      - pm-utils
+    service:
+      name: libvirt-bin
+    kvm:
+      pkgs:
+        - qemu-kvm
+        - qemu-utils
+      ksm:
+        service_script:
+          manage: True
+  RedHat:
+    pkgs:
+      - libvirt
+    service:
+      name: libvirtd
+    kvm:
+      pkgs:
+        - qemu-kvm
+oscodename:
+  jessie:
+    service:
+      name: libvirtd

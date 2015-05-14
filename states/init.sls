@@ -1,7 +1,6 @@
 #!jinja|yaml
 
-{% from "libvirt/defaults.yaml" import rawmap with context %}
-{% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('libvirt:lookup')) %}
+{% set datamap = salt['formhelper.defaults']('libvirt', saltenv) %}
 
 libvirt:
   pkg:
@@ -9,15 +8,15 @@ libvirt:
     - pkgs: {{ datamap.pkgs }}
   service:
     - running
-    - name: {{ datamap.service.name|default('libvirtd') }}
+    - name: {{ datamap.service.name }}
     - enable: {{ datamap.service.enable|default(True) }}
-    - require:
-      - pkg: libvirt
 
 storages_dir:
   file:
     - name: {{ datamap.config.storages_dir.path|default('/etc/libvirt/storage') }}
     - directory
+    - require_in:
+      - service: libvirt
 
 #TODO:
 #/etc/libvirt/libvirtd.conf
