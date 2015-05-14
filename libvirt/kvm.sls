@@ -1,3 +1,5 @@
+#!jinja|yaml
+
 {% from "libvirt/defaults.yaml" import rawmap with context %}
 {% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('libvirt:lookup')) %}
 
@@ -7,10 +9,7 @@ include:
 kvm:
   pkg:
     - installed
-    - pkgs:
-{% for p in datamap.kvm.pkgs %}
-      - {{ p }}
-{% endfor %}
+    - pkgs: {{ datamap.kvm.pkgs }}
 
 {% set kk = datamap.kvm.ksm|default({'service': {}, 'service_script': {}}) %}
 {% if kk.service_script.manage|default(False) %}

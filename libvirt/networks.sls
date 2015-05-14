@@ -1,3 +1,5 @@
+#!jinja|yaml
+
 {% from "libvirt/defaults.yaml" import rawmap with context %}
 {% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('libvirt:lookup')) %}
 
@@ -6,6 +8,7 @@ include:
 
 {% for name, n in salt['pillar.get']('libvirt:networks', {}).items() %}
   {% set nf_path = datamap.config.networks_dir.path|default('/etc/libvirt/qemu/networks') ~ '/' ~ name ~ '.xml.orig' %}
+
 {{ nf_path }}:
   file:
     - {% if n.ensure|default('running') in ['present', 'running'] %}managed{% elif n.ensure|default('running') == 'absent' %}absent{% endif %}
@@ -13,6 +16,8 @@ include:
     - user: {{ datamap.config.network_file.user|default('root') }}
     - group: {{ datamap.config.network_file.group|default('root') }}
     - contents_pillar: libvirt:networks:{{ name }}:xml
+    - watch_in:
+      - service: libvirt
 
 net-{{ name }}:
   cmd:
