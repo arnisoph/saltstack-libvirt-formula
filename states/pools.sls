@@ -1,32 +1,40 @@
 #!jinja|yaml
 
-{% from "libvirt/defaults.yaml" import rawmap with context %}
-{% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('libvirt:lookup')) %}
+{% set datamap = salt['formhelper.defaults']('libvirt', saltenv) %}
 
 include:
   - libvirt
 
-{% for name, p in salt['pillar.get']('libvirt:pools', {}).items() %}
+{% for name, p in datamap.pools|default({})|dictsort %}
   {% set po_path = datamap.config.storages_dir.path|default('/etc/libvirt/storage') ~ '/' ~ name ~ '.xml.orig' %}
 
-{{ po_path }}:
+  {% if p.ensure|default('running') in ['present', 'running'] %}
+    {% set po_ensure = 'managed' %}
+  {% else %}
+    {% set po_ensure = 'absent' %}
+  {% endif %}
+
+libvirt_pool_{{ name }}:
   file:
-    - {% if p.ensure|default('running') in ['present', 'running'] %}managed{% elif p.ensure|default('running') == 'absent' %}absent{% endif %}
+    - {{ po_ensure }}
+    - name: {{ po_path }}
+  {% if po_ensure == 'managed' %}
     - mode: {{ datamap.config.storage_file.mode|default('600') }}
     - user: {{ datamap.config.storage_file.user|default('root') }}
     - group: {{ datamap.config.storage_file.group|default('root') }}
-    - contents_pillar: libvirt:pools:{{ name }}:xml
+    - contents_pillar: libvirt:lookup:pools:{{ name }}:xml
+  {% endif %}
     - watch_in:
       - service: libvirt
 
 {% if p.type == 'dir' and p.ensure|default('running') in ['present', 'running'] %}
-{{ name }}-{{ p.path }}:
+libvirt_pool_{{ name }}_dir_{{ p.path }}:
   file:
     - directory
     - name: {{ p.path }}
 {% endif %}
 
-pool-{{ name }}:
+libvirt_virsh_pool_{{ name }}:
   cmd:
     - run
   {% if p.ensure|default('running') in ['present', 'running'] %}
@@ -37,7 +45,7 @@ pool-{{ name }}:
     - onlyif: virsh -q pool-list --all | grep -q '^{{ name }}'
  {% endif %}
 
-pool-autostart-{{ name }}:
+libvirt_pool_virsh_autostart_{{ name }}:
   cmd:
     - run
   {% if p.autostart|default(True) and p.ensure|default('running') != 'absent' %}
@@ -48,7 +56,7 @@ pool-autostart-{{ name }}:
     - onlyif: virsh pool-info {{ name }} | grep -Eq '^Autostart:\s+yes'
   {% endif %}
 
-pool-startstop-{{ name }}:
+libvirt_virsh_pool_startstop_{{ name }}:
   cmd:
     - run
   {% if p.ensure|default('running') == 'running' %}
