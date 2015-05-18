@@ -21,8 +21,10 @@ ksm_servicescript:
     - group: root
 {% endif %}
 
+{% if datamap.kvm.ksm.service.manage|default(True) %}
 ksm_service:
   service:
     - {{ datamap.kvm.ksm.service.state|default('running') }}
     - name: {{ datamap.kvm.ksm.service.name|default('ksm') }}
     - enable: {{ datamap.kvm.ksm.service.enable|default(True) }}
+{% endif %}
