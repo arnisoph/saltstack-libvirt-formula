@@ -32,10 +32,10 @@ libvirt_virsh_net_{{ name }}:
     - run
   {% if n.ensure|default('running') in ['present', 'running'] %}
     - name: virsh net-define {{ nf_path }}
-    - unless: virsh -q net-list --all | grep -q '^\s+{{ name }}'
+    - unless: virsh -q net-list --all | grep -Eq '^\s+{{ name }}'
  {% elif n.ensure|default('running') == 'absent' %}
     - name: virsh net-destroy {{ name }} 2>&1 1>/dev/null; virsh net-undefine {{ name }}
-    - onlyif: virsh -q net-list --all | grep -q '^\s+{{ name }}'
+    - onlyif: virsh -q net-list --all | grep -Eq '^\s+{{ name }}'
  {% endif %}
 
 libvirt_virsh_net-autostart_{{ name }}:
