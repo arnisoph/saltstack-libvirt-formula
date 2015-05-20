@@ -61,9 +61,9 @@ libvirt_virsh_pool_startstop_{{ name }}:
     - run
   {% if p.ensure|default('running') == 'running' %}
     - name: virsh pool-start {{ name }}
-    - unless: virsh -q pool-list --all | grep -Eq '^{{ name }}\s+active'
+    - unless: virsh -q pool-list --all | grep -Eq '^\s?{{ name }}\s+active'
   {% elif p.ensure|default('running') in ['stopped', 'absent'] %}
     - name: virsh pool-destroy {{ name }}
-    - onlyif: virsh -q pool-list --all | grep -Eq '^{{ name }}\s+active'
+    - onlyif: virsh -q pool-list --all | grep -Eq '^\s?{{ name }}\s+active'
   {% endif %}
 {% endfor %}

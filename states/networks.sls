@@ -54,9 +54,9 @@ libvirt_virsh_net_startstop_{{ name }}:
     - run
   {% if n.ensure|default('running') == 'running' %}
     - name: virsh net-start {{ name }}
-    - unless: virsh -q net-list --all | grep -Eq '^{{ name }}\s+active'
+    - unless: virsh -q net-list --all | grep -Eq '^\s?{{ name }}\s+active'
   {% elif n.ensure|default('running') in ['stopped', 'absent'] %}
     - name: virsh net-destroy {{ name }}
-    - onlyif: virsh -q net-list --all | grep -Eq '^{{ name }}\s+active'
+    - onlyif: virsh -q net-list --all | grep -Eq '^\s?{{ name }}\s+active'
   {% endif %}
 {% endfor %}
