@@ -39,10 +39,10 @@ libvirt_virsh_pool_{{ name }}:
     - run
   {% if p.ensure|default('running') in ['present', 'running'] %}
     - name: virsh pool-define {{ po_path }}
-    - unless: virsh -q pool-list --all | grep -q '^{{ name }}'
+    - unless: virsh -q pool-list --all | grep -Eq '^\s*{{ name }}'
  {% elif p.ensure|default('running') == 'absent' %}
     - name: virsh pool-destroy {{ name }} 2>&1 1>/dev/null; virsh pool-undefine {{ name }}
-    - onlyif: virsh -q pool-list --all | grep -q '^{{ name }}'
+    - onlyif: virsh -q pool-list --all | grep -Eq '^\s*{{ name }}'
  {% endif %}
 
 libvirt_pool_virsh_autostart_{{ name }}:
@@ -61,9 +61,9 @@ libvirt_virsh_pool_startstop_{{ name }}:
     - run
   {% if p.ensure|default('running') == 'running' %}
     - name: virsh pool-start {{ name }}
-    - unless: virsh -q pool-list --all | grep -Eq '^{{ name }}\s+active'
+    - unless: virsh -q pool-list --all | grep -Eq '^\s*{{ name }}\s+active'
   {% elif p.ensure|default('running') in ['stopped', 'absent'] %}
     - name: virsh pool-destroy {{ name }}
-    - onlyif: virsh -q pool-list --all | grep -Eq '^{{ name }}\s+active'
+    - onlyif: virsh -q pool-list --all | grep -Eq '^\s*{{ name }}\s+active'
   {% endif %}
 {% endfor %}
