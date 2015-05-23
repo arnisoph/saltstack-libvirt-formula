@@ -2,21 +2,29 @@
 saltstack-libvirt-formula
 =========================
 
-.. image:: http://issuestats.com/github/bechtoldt/saltstack-libvirt-formula/badge/issue
-    :target: http://issuestats.com/github/bechtoldt/saltstack-libvirt-formula
 
-.. image:: https://api.flattr.com/button/flattr-badge-large.png
-    :target: https://flattr.com/submit/auto?user_id=bechtoldt&url=https%3A%2F%2Fgithub.com%2Fbechtoldt%2Fsaltstack-libvirt-formula
+.. image:: https://img.shields.io/badge/flattr-donate-red.svg
+    :alt: Donate via flattr
+    :target: https://flattr.com/profile/bechtoldt
 
-.. image:: https://badges.gitter.im/Join%20Chat.svg
-   :alt: Join the chat at https://gitter.im/bechtoldt/saltstack-libvirt-formula
-   :target: https://gitter.im/bechtoldt/saltstack-libvirt-formula?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+.. image:: https://img.shields.io/gratipay/bechtoldt.svg
+    :alt: Donate via Gratipay
+    :target: https://www.gratipay.com/bechtoldt/
+
+.. image:: https://img.shields.io/badge/license-Apache--2.0-blue.svg
+    :alt: Apache-2.0-licensed
+    :target: https://github.com/bechtoldt/saltstack-libvirt-formula/blob/master/LICENSE
+
+.. image:: https://img.shields.io/badge/gitter-chat-brightgreen.svg
+    :alt: Join Chat
+    :target: https://gitter.im/bechtoldt/saltstack-libvirt-formula?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 SaltStack Formula to set up and configure libvirt, a virtualization API
 
 .. contents::
     :backlinks: none
     :local:
+
 
 Instructions
 ------------
@@ -31,18 +39,6 @@ see how this can be achieved.
 
 Take a look at older `releases <https://github.com/bechtoldt/saltstack-libvirt-formula/releases>`_ to get a version that isn't using the formhelper
 yet (if any).
-
-
-Compatibility
--------------
-
-See <TODO> file to see which Salt versions and operating systems are supported.
-
-
-Dependencies
-------------
-
-None
 
 
 Contributing
@@ -63,16 +59,15 @@ But it’s better to `file an issue <https://github.com/bechtoldt/saltstack-libv
 TODO
 ----
 
-* add instructions how to use formhelper, add information about it in the
-  formula-docs (dependency), show up alternative?
+* add instructions how to use formhelper, add information about it in the formula-docs (dependency), show up alternative?
 * table/ matrix: os/salt compatibility (dedicated file)
 * add list of available states
 * add tests
 * Manage libvirt/ KVM/ QEMU configuration files
 
 
-Additional Resources
---------------------
+Miscellaneous
+-------------
 
 Recommended formulas:
 
@@ -81,6 +76,7 @@ Recommended formulas:
 Further reading:
 
 * Documentation and Standardisation of SaltStack formulas: https://github.com/bechtoldt/formula-docs
+
 
 .. image:: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva.png
     :target: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva
