@@ -82,6 +82,5 @@ Further reading:
 
 * Documentation and Standardisation of SaltStack formulas: https://github.com/bechtoldt/formula-docs
 
-
 .. image:: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva.png
     :target: https://asciinema.org/a/38jyzix32bngnvm4ei1k7jzva
